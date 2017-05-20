@@ -12,7 +12,7 @@ const PROJECT_ROOT = path.resolve(__dirname)
 module.exports = {
   entry: {
     main: [path.join(PROJECT_ROOT, 'src')],
-    // vendor: ['babel-polyfill', 'react', 'react-dom', 'redux', 'react-redux'],
+    vendor: ['babel-polyfill', 'react', 'react-dom', 'mobx', 'mobx-react'],
   },
   output: {
     path: path.join(PROJECT_ROOT, 'build'),
@@ -24,17 +24,18 @@ module.exports = {
   },
   plugins: [
     gitRevisionPlugin,
-    new DefinePlugin({
-      __VERSION__: str(gitRevisionPlugin.commithash() + '@' + gitRevisionPlugin.version()),
-    }),
     new CommonsChunkPlugin({
       name: 'vendor',
-      filename: 'vendor.[chunkhash].js',
+      filename: 'vendor.[hash].js',
       minChunks: Infinity
     }),
     new HtmlWebpackPlugin({
       title: 'Learn about Color Spaces',
       template: path.join(PROJECT_ROOT, 'src/index.html')
+    }),
+    new DefinePlugin({
+      __VERSION__: str(gitRevisionPlugin.commithash() + '@' + gitRevisionPlugin.version()),
+      __DEV__: process.env.NODE_ENV !== 'production'
     }),
   ],
   module: {
