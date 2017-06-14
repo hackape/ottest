@@ -1,0 +1,19 @@
+@import 'normalize'
+@import 'variables'
+@import "mixins"
+@import 'scaffolding'
+
+@import "../../node_modules/codemirror/lib/codemirror.css"
+@import "../../node_modules/codemirror/theme/monokai.css"
+
+.hidden {
+  display: none !important
+}
+
+a {
+  color: $text-color;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}

@@ -31,6 +31,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       title: 'Learn about Color Spaces',
+      filename: 'index.html',
       template: path.join(PROJECT_ROOT, 'src/index.html')
     }),
     new DefinePlugin({
@@ -40,7 +41,18 @@ module.exports = {
   ],
   module: {
     rules: [
-      { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader' }
+      { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader' },
+      {
+        test: /\.styl$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'stylus-loader'
+        ]
+      }, {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      }
     ]
   }
 }
